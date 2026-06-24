@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL:  'https://code-reviewer-s8o4.onrender.com/api',
   timeout: 10000,
 });
 
