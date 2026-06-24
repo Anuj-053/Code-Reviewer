@@ -2,9 +2,10 @@
   "name": "ai-code-reviewer-workspace",
   "version": "1.0.0",
   "scripts": {
+    "install-root": "npm install",
     "install-client": "npm install --prefix client",
     "build-client": "npm run build --prefix client",
-    "build": "npm run install-client && npm run build-client",
+    "build": "npm run install-root && npm run install-client && npm run build-client",
     "start": "node server/server.js"
   },
   "dependencies": {
