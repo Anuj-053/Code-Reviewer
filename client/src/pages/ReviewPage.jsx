@@ -171,7 +171,8 @@ export default function ReviewPage() {
     }
 
     try {
-      const response = await fetch('/api/review/submit', {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/review/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
