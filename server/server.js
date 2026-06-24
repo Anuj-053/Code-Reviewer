@@ -17,6 +17,10 @@ const allowedOrigins = [
   'http://127.0.0.1:5173',
 ];
 
+if (process.env.RENDER_EXTERNAL_URL) {
+  allowedOrigins.push(process.env.RENDER_EXTERNAL_URL);
+}
+
 app.use(
   cors({
     origin: (origin, callback) => {
