@@ -27,11 +27,8 @@ const cleanedOrigins = allowedOrigins.map(o => o.trim().replace(/\/$/, ''));
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin and allowed origins (ignoring trailing slashes)
-      if (!origin || cleanedOrigins.includes(origin.trim().replace(/\/$/, ''))) {
-        return callback(null, true);
-      }
-      callback(new Error('Not allowed by CORS'));
+      // Allow any origin dynamically (supports credentials: true)
+      callback(null, true);
     },
     credentials: true,
   })
