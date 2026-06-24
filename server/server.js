@@ -46,6 +46,15 @@ app.use('/api/review', reviewRoutes);
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
+// Serve static assets in production
+const path = require('path');
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+  });
+}
+
 // Global error handler
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
