@@ -21,11 +21,16 @@ if (process.env.RENDER_EXTERNAL_URL) {
   allowedOrigins.push(process.env.RENDER_EXTERNAL_URL);
 }
 
+// Clean up allowed origins by removing trailing slashes
+const cleanedOrigins = allowedOrigins.map(o => o.trim().replace(/\/$/, ''));
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (curl, Postman) and allowed origins
-      if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+      // Allow requests with no origin and allowed origins (ignoring trailing slashes)
+      if (!origin || cleanedOrigins.includes(origin.trim().replace(/\/$/, ''))) {
+        return callback(null, true);
+      }
       callback(new Error('Not allowed by CORS'));
     },
     credentials: true,
